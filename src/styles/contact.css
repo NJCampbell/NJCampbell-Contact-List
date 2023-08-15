@@ -1,0 +1,48 @@
+.contact {
+    display: flex;
+    border: gray solid 1px;
+    width: 1300px;
+    margin: auto;
+    padding: 20px 50px;
+}
+
+.contact-img {
+    border-radius: 100%;
+    width: 250px;
+    height: 250px;
+    transform: translateY(5%)
+}
+
+.contact-info {
+    margin-left: 100px;
+    padding-top: 30px;
+    width: 700px;
+}
+
+.contact-name {
+    font-size: 35px;
+}
+
+.contact-address, .contact-phone, .contact-email {
+    color: rgb(105,105,105);
+}
+
+.contact-address {
+    font-size: large;
+}
+
+.address, .phone-number, .email {
+    margin-left: 20px;
+}
+
+.contact-edit {
+    padding-top: 30px;
+}
+
+.bi-trash-fill {
+    margin-left: 50px;
+}
+
+.bi-trash-fill:hover, .bi-pencil-fill:hover {
+    cursor: pointer;
+}
