@@ -1,24 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: [
-				{
-					// full_name: "Jack Smith",
-					// email: "jsmith@aol.com",
-					// address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
-					// phone: "(654) 987-4321",
-					// agenda_slug: "rickr"
-				}
-			]
-
+			contacts: []
 		},
-		// this: state = {
-		// 	name: '',
-		// 	email: '',
-		// 	phone: '',
-		// 	address: '',
 
-		// },
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -35,7 +20,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 						setStore({ contacts: data })
 					})
-
 			},
 
 			// delete one contact
@@ -67,17 +51,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(newContact),
 					headers: { 'Content-type': 'application/json' }
 				}
-
 				fetch("https://playground.4geeks.com/apis/fake/contact/", options)
 					.then(response => {
 						if (!response.ok) throw Error(response.statusText);
 						return response;
 					})
 					.then(() => console.log("Successfully added one contact"))
-			},
-
-			handleSubmit: (event) => {
-				event.preventDefault();
 			},
 
 			saveContact: (full_name, email, phone, address) => {
@@ -88,13 +67,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					email: "jsmith@aol.com",
 					address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
 					phone: "(654) 987-4321",
-					agenda_slug: "rickr"
+					agenda_slug: "rickr",
+					id: "id"
 				}
-
 				getActions().addContact(newContact);
+				getActions().fetchCreateOneContact();
 				setStore({ contacts: revisedStore })
 				// handleSubmit();
 			},
+
 			//add a new contact
 			fetchCreateOneContact: (newContact) => {
 				let options = {
@@ -102,7 +83,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(newContact),
 					headers: { 'Content-type': 'application/json' }
 				}
-
 				fetch("https://playground.4geeks.com/apis/fake/contact/", options)
 					.then(response => {
 						if (!response.ok) throw Error(response.statusText);
@@ -118,21 +98,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ contacts: revisedStore })
 			},
 
+			// input form
+
 			handleInputChange: (event) => {
 				const { name, value } = event.target;
-				this.setState({ [name]: value });
+				this; state = {
+					name: '',
+					email: '',
+					phone: '',
+					address: '',
+
+				},
+					this.setState({ [name]: value });
 			},
 
-
-			//update a contact 	NEED TO ADD 
-			// handleChange(event) {
-			// 	this.setState({ value: event.target.value });
-			// },
-
-			// handleSubmit(event) {
-			// 	alert('Your favorite flavor is: ' + this.state.value);
-			// 	event.preventDefault();
-			// }
+			//onChange
+			handleSubmit: (event) => {
+				event.preventDefault();
+			},
 		}
 	}
 }
