@@ -1,13 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState} from "react";
 import { Context } from "../store/appContext";
+
 
 import "../../styles/addContact.css";
 
-const AddContact = () => {
+const AddContact = ({ handleInputChange }) => {
     const { store, actions } = useContext(Context);
+    const { fullName, setFullName } = useState("");
+    const { email, setEmail } = useState("");
+    const { phone, setPhone } = useState("");
+    const { address, setAddress } = useState("");
 
-  
 
+
+ 
    
     return (
         <>
@@ -20,15 +26,17 @@ const AddContact = () => {
                             <input
                              type="text"
                              name="name"
-                             value={store.contacts.full_name}
-                             placeholder="Full Name"></input>
+                             value={fullName}
+                             onChange={handleInputChange}
+                             placeholder="Enter full name"></input>
                        </label>
                        <label>
                             Email:
                             <input
                              type="text"
                              name="email"
-                             value={store.contacts.email}
+                             value={email}
+                             onChange={handleInputChange}
                              placeholder="Enter email"></input>
                        </label>
                        <label>
@@ -36,7 +44,8 @@ const AddContact = () => {
                             <input
                              type="text"
                              name="phone"
-                             value={store.contacts.phone}
+                             value={phone}
+                             onChange={handleInputChange}
                              placeholder="Enter phone"></input>
                        </label>
                        <label>
@@ -44,7 +53,8 @@ const AddContact = () => {
                             <input
                              type="text"
                              name="address"
-                             value={store.contacts.address}
+                             value={address}
+                             onChange={handleInputChange}
                              placeholder="Enter address"></input>
                        </label>
                                               
@@ -60,6 +70,8 @@ const AddContact = () => {
 };
 
 export default AddContact;
+
+//handleSubmit replaced the following: () => actions.saveContact()
 
 
 /* <button>Cancel/Go Back</button> */ 

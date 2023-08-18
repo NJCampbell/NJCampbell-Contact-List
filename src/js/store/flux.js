@@ -12,6 +12,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 
 		},
+		// this: state = {
+		// 	name: '',
+		// 	email: '',
+		// 	phone: '',
+		// 	address: '',
+
+		// },
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -30,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 			},
+
 			// delete one contact
 			fetchDeleteOneContact: id => {
 				let options = {
@@ -51,8 +59,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().fetchDeleteOneContact(id);
 				setStore({ contacts: revisedContactList });
 			},
+
 			//save contact
-			saveContact: () => {
+			fetchUpdateOneContact: (newContact) => {
+				let options = {
+					method: 'POST',
+					body: JSON.stringify(newContact),
+					headers: { 'Content-type': 'application/json' }
+				}
+
+				fetch("https://playground.4geeks.com/apis/fake/contact/", options)
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						return response;
+					})
+					.then(() => console.log("Successfully added one contact"))
+			},
+
+			handleSubmit: (event) => {
+				event.preventDefault();
+			},
+
+			saveContact: (full_name, email, phone, address) => {
 				const store = getStore();
 				let newContact = {
 					full_name: "Jack Smith",
@@ -61,15 +89,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					phone: "(654) 987-4321",
 					agenda_slug: "rickr"
 				}
+				
 				getActions().addContact(newContact);
+				handleSubmit();
 			},
 			//add a new contact
+			fetchCreateOneContact: (newContact) => {
+				let options = {
+					method: 'POST',
+					body: JSON.stringify(newContact),
+					headers: { 'Content-type': 'application/json' }
+				}
+
+				fetch("https://playground.4geeks.com/apis/fake/contact/", options)
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						return response;
+					})
+					.then(() => console.log("Successfully added one contact"))
+			},
+
 			addContact: (aNewContact) => {
 				const store = getStore();
 				let revisedStore = [...store.contacts, aNewContact];
 				getActions().fetchCreateOneContact(aNewContact);
 				setStore({ contacts: revisedStore })
 			},
+
+			handleInputChange: (event) => {
+				const { name, value } = event.target;
+				this.setState({ [name]: value });
+			},
+
+			
 			//update a contact 	NEED TO ADD 
 			// handleChange(event) {
 			// 	this.setState({ value: event.target.value });
