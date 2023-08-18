@@ -1,8 +1,12 @@
+h1 {
+    text-align: center;
+}
+
 .addContactContainer {
     background-color: white;
     width: 50%;
     height: 50%;
-    margin: 50px 600px;
+    margin: 50px 25%;
     border: 1px;
     
 }
@@ -10,4 +14,15 @@
 .contact-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;    
+    margin: 30px 20px;
+    row-gap: 20px;
+    width: 95%;
+}
+.inputField {
+    width: 100%;
+}
+#saveButton {
+    margin: 20px 20px; 
+    width: 95%;
 }

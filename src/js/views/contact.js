@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 
 const Contact = () => {
@@ -7,10 +8,16 @@ const Contact = () => {
 
     return (
         <>
+            <div>
+            <Link to="/addContact">
+					<button className="btn btn-success" id="AddContactPage">Add New Contact</button>
+				</Link>
+            </div>
             {store.contacts.map((contact) => {
                 return (
+                    
                     <div className="contact" key={contact.id}>
-                        <img className="contact-img" src="https://xsgames.co/randomusers/avatar.php?g=male" />
+                        <img className="contact-img" src="https://xsgames.co/randomusers/avatar.php?g=female" />
                         <div className="contact-info">
                             <p className="contact-name">{contact.full_name}</p>
                             <p className="contact-address">

@@ -29,7 +29,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(id),
 					headers: { 'Content-type': 'application/json' }
 				}
-
 				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, options)
 					.then(response => {
 						if (!response.ok) throw Error(response.statusText);

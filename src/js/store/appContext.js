@@ -32,13 +32,7 @@ const injectContext = PassedComponent => {
 			 *
 			 **/
 			state.actions.fetchAllContacts();
-			// state.actions.addContact();
-			// state.actions.deleteContact();
-			// state.actions.fetchCreateOneContact();
-			// state.actions.fetchDeleteOneContact();
-			// state.actions.handleInputChange();
-			// state.actions.handleSubmit();
-			// state.actions.saveContact();
+
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

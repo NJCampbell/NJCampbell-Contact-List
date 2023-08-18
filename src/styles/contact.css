@@ -1,3 +1,13 @@
+body {
+    background-color: white;
+}
+#AddContactPage {
+    margin-top: 20px;
+    margin-left: 75%;
+    margin-bottom: 30px;
+    
+}
+
 .contact {
     display: flex;
     border: gray solid 1px;
