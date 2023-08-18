@@ -3,11 +3,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			contacts: [
 				{
-					full_name: "Jack Smith",
-					email: "jsmith@aol.com",
-					address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
-					phone: "(654) 987-4321",
-					agenda_slug: "rickr"
+					// full_name: "Jack Smith",
+					// email: "jsmith@aol.com",
+					// address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
+					// phone: "(654) 987-4321",
+					// agenda_slug: "rickr"
 				}
 			]
 
@@ -82,16 +82,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			saveContact: (full_name, email, phone, address) => {
 				const store = getStore();
+				let revisedStore = [...store.contacts, newContact];
 				let newContact = {
-					full_name: "Jack Smith",
+					full_name: "Ricky Bobby",
 					email: "jsmith@aol.com",
 					address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
 					phone: "(654) 987-4321",
 					agenda_slug: "rickr"
 				}
-				
+
 				getActions().addContact(newContact);
-				handleSubmit();
+				setStore({ contacts: revisedStore })
+				// handleSubmit();
 			},
 			//add a new contact
 			fetchCreateOneContact: (newContact) => {
@@ -121,7 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				this.setState({ [name]: value });
 			},
 
-			
+
 			//update a contact 	NEED TO ADD 
 			// handleChange(event) {
 			// 	this.setState({ value: event.target.value });
