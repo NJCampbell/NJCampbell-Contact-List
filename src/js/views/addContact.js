@@ -4,12 +4,12 @@ import { Context } from "../store/appContext";
 
 import "../../styles/addContact.css";
 
-const AddContact = ({ handleInputChange }) => {
+const AddContact = ({ fetchCreateOneContact }) => {
     const { store, actions } = useContext(Context);
-    const { fullName, setFullName } = useState("");
-    const { email, setEmail } = useState("");
-    const { phone, setPhone } = useState("");
-    const { address, setAddress } = useState("");
+    const [ fullName, setFullName ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ phone, setPhone ] = useState("");
+    const [ address, setAddress ] = useState("");
 
 
 
@@ -27,7 +27,7 @@ const AddContact = ({ handleInputChange }) => {
                              type="text"
                              name="name"
                              value={fullName}
-                             onChange={handleInputChange}
+                             onChange={(e) => setFullName(e.target.value)}
                              placeholder="Enter full name"></input>
                        </label>
                        <label>
@@ -36,7 +36,7 @@ const AddContact = ({ handleInputChange }) => {
                              type="text"
                              name="email"
                              value={email}
-                             onChange={handleInputChange}
+                             onChange={(e) => setEmail(e.target.value)}
                              placeholder="Enter email"></input>
                        </label>
                        <label>
@@ -45,7 +45,7 @@ const AddContact = ({ handleInputChange }) => {
                              type="text"
                              name="phone"
                              value={phone}
-                             onChange={handleInputChange}
+                             onChange={(e) => setPhone(e.target.value)}
                              placeholder="Enter phone"></input>
                        </label>
                        <label>
@@ -54,13 +54,13 @@ const AddContact = ({ handleInputChange }) => {
                              type="text"
                              name="address"
                              value={address}
-                             onChange={handleInputChange}
+                             onChange={(e)=> setAddress(e.target.value)}
                              placeholder="Enter address"></input>
                        </label>
                                               
                     
                 </div>      
-                <button onClick={() => actions.saveContact()}>Save</button>   
+                <button onClick={() => actions.fetchCreateOneContact(fullName, email, phone, address)}>Save</button>   
                                        
                 
             </div>

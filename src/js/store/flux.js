@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/njcamp_agenda")
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/njcamp")
 					.then(response => response.json())
 					.then(data => {
 						console.log(data);
@@ -59,62 +59,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(() => console.log("Successfully added one contact"))
 			},
 
-			saveContact: (full_name, email, phone, address) => {
-				const store = getStore();
-				let revisedStore = [...store.contacts, newContact];
-				let newContact = {
-					full_name: "Ricky Bobby",
-					email: "jsmith@aol.com",
-					address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
-					phone: "(654) 987-4321",
-					agenda_slug: "rickr",
-					id: "id"
-				}
-				getActions().addContact(newContact);
-				getActions().fetchCreateOneContact();
-				setStore({ contacts: revisedStore })
-				// handleSubmit();
-			},
-
 			//add a new contact
-			fetchCreateOneContact: (newContact) => {
+			fetchCreateOneContact: (full_name, email, phone, address) => {
 				let options = {
 					method: 'POST',
-					body: JSON.stringify(newContact),
+					body: JSON.stringify({ full_name: full_name, email: email, phone: phone, address: address, agenda_slug: "njcamp" }),
 					headers: { 'Content-type': 'application/json' }
 				}
 				fetch("https://playground.4geeks.com/apis/fake/contact/", options)
 					.then(response => {
 						if (!response.ok) throw Error(response.statusText);
+						getActions().fetchAllContacts();
+						const store = getStore();
+						let revisedStore = [...store.contacts, response];
+						setStore({ contacts: revisedStore })
 						return response;
 					})
 					.then(() => console.log("Successfully added one contact"))
-			},
-
-			addContact: (aNewContact) => {
-				const store = getStore();
-				let revisedStore = [...store.contacts, aNewContact];
-				getActions().fetchCreateOneContact(aNewContact);
-				setStore({ contacts: revisedStore })
-			},
-
-			// input form
-
-			handleInputChange: (event) => {
-				const { name, value } = event.target;
-				this; state = {
-					name: '',
-					email: '',
-					phone: '',
-					address: '',
-
-				},
-					this.setState({ [name]: value });
-			},
-
-			//onChange
-			handleSubmit: (event) => {
-				event.preventDefault();
+					.catch(
+						error => console.error("Did not work", error)
+					)
 			},
 		}
 	}
@@ -136,3 +100,19 @@ export default getState;
 // 	//reset the global store
 // 	setStore({ demo: demo });
 // },
+	// saveContact: (full_name, email, phone, address) => {
+			// 	const store = getStore();
+			// 	let revisedStore = [...store.contacts, newContact];
+			// 	let newContact = {
+			// 		full_name: full_name,
+			// 		email: email,
+			// 		address: address,
+			// 		phone: phone,
+			// 		agenda_slug: "njcamp",
+
+			// 	}
+			// 	getActions().addContact(newContact);
+
+			// 	setStore({ contacts: revisedStore })
+			// 	// handleSubmit();
+			// },
