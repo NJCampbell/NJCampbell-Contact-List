@@ -4,32 +4,35 @@ import { Context } from "../store/appContext";
 const AddContact = () => {
     const { store, actions } = useContext(Context);
 
-    useEffect(() => {
-        actions.createOneContact();
-    }, [])
+   
     return (
         <>
-            {/* <div className="contact-form">
-                {store.contacts(() => {
-                    return (
-                        <div className="contact-input-list">
-                            <h1>Add Additional Contacts</h1>
-                            <input type="text"
-                                placeholder="name"
-                                value={contact.name}></input>
-
-                            <button onClick={() => { createOneContact() }}>Submit</button>
-                        </div>
-
-                    );
-                })};
-
-
-
-            </div> */}
-
+         {store.contacts.map((contacts) => {
+            <div className="add-contact-container">             
+                <h1>Add a new contact</h1>
+                <div className="contact-form">
+                    
+                        <input
+                        type="text"
+                        value={store.contacts.full_name}
+                        placeholder="Full Name">Full Name</input>
+                        <input
+                        type="text"
+                        placeholder="Enter email">Email</input>
+                        <input
+                        type="text"
+                        placeholder="Enter phone">Phone</input>
+                        <input
+                        type="text"
+                        placeholder="Enter address">Address</input>
+                        
+                    
+                </div>                                
+                
+            </div>
+         })}         
         </>
-    );
+         )    
 };
 
 export default AddContact;

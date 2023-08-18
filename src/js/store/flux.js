@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/rickr")
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jessm")
 					.then(response => response.json())
 					.then(data => {
 						console.log(data);
