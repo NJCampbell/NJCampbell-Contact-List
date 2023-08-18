@@ -1,7 +1,15 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [
+				{
+					full_name: "Jack Smith",
+					email: "jsmith@aol.com",
+					address: "2468 Whodoweappreciate Lane, Ocala, FL, 33333",
+					phone: "(654) 987-4321",
+					agenda_slug: "rickr"
+				}
+			]
 
 		},
 		actions: {
@@ -9,11 +17,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+			//fetch all contacts from one agenda
 			fetchAllContacts: () => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jessm")
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/njcamp_agenda")
 					.then(response => response.json())
 					.then(data => {
 						console.log(data);
@@ -21,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 			},
+			// delete one contact
 			fetchDeleteOneContact: id => {
 				let options = {
 					method: 'DELETE',
@@ -41,7 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().fetchDeleteOneContact(id);
 				setStore({ contacts: revisedContactList });
 			},
-			saveContact: (fullName, address, email, phone) => {
+			//save contact
+			saveContact: () => {
+				const store = getStore();
 				let newContact = {
 					full_name: "Jack Smith",
 					email: "jsmith@aol.com",
@@ -51,12 +63,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				getActions().addContact(newContact);
 			},
+			//add a new contact
 			addContact: (aNewContact) => {
 				const store = getStore();
 				let revisedStore = [...store.contacts, aNewContact];
 				getActions().fetchCreateOneContact(aNewContact);
 				setStore({ contacts: revisedStore })
-			}
+			},
+			//update a contact 	NEED TO ADD 
+			// handleChange(event) {
+			// 	this.setState({ value: event.target.value });
+			// },
+
+			// handleSubmit(event) {
+			// 	alert('Your favorite flavor is: ' + this.state.value);
+			// 	event.preventDefault();
+			// }
 		}
 	}
 }

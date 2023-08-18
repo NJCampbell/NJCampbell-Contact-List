@@ -43,7 +43,7 @@ const Contact = () => {
                     </div>
                 );
             })}
-            <button onClick={() => actions.saveContact()}>Add Contact</button>
+
         </>
     );
 };
